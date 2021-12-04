@@ -1,4 +1,5 @@
 package com.example.bankingsystem.dao;
+import com.example.bankingsystem.model.Account;
 import com.example.bankingsystem.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
+    private static final AccountDAO accountDAO = new AccountDAO();
+
     public User find(Integer id) throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM tbl_user WHERE id=" + id;
 
@@ -20,8 +23,7 @@ public class UserDAO {
         }
     }
 
-    private User getUserFromResultSet(ResultSet rs) throws SQLException
-    {
+    private User getUserFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
         User user = null;
 
         if (rs.next()) {
@@ -31,7 +33,9 @@ public class UserDAO {
             user.setEmail(rs.getString("email"));
             user.setBirthday(rs.getDate("birthday"));
             user.setCurrency(rs.getString("currency"));
-//            user.setAccount()
+
+            Account account = accountDAO.find(rs.getInt("account_id"));
+            user.setAccount(account);
         }
 
         return user;
@@ -60,6 +64,10 @@ public class UserDAO {
             user.setUsername(rs.getString("username"));
             user.setBirthday(rs.getDate("birthday"));
             user.setCurrency(rs.getString("currency"));
+
+            Account account = accountDAO.find(rs.getInt("account_id"));
+            user.setAccount(account);
+
             users.add(user);
         }
 
@@ -80,7 +88,10 @@ public class UserDAO {
                 "END;";
 
         try {
+            User toUpdate = find(id);
+            Account account = accountDAO.find(toUpdate.getId());
             DBUtil.dbExecuteUpdate(updateStmt);
+            accountDAO.update(account.getId(), user.getAccount());
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;
@@ -96,7 +107,9 @@ public class UserDAO {
                 "END;";
 
         try {
+            User user = find(id);
             DBUtil.dbExecuteUpdate(updateStmt);
+            accountDAO.delete(user.getAccount().getId());
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Operation: " + e);
             throw e;
@@ -122,6 +135,7 @@ public class UserDAO {
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
+            accountDAO.create(user.getAccount());
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Operation: " + e);
             throw e;
