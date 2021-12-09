@@ -1,4 +1,4 @@
 package com.example.bankingsystem.controller;
 
-public class MainController {
+public class MainController extends Controller{
 }

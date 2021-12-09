@@ -3,6 +3,7 @@ package com.example.bankingsystem.model;
 import javafx.beans.property.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Account {
     private IntegerProperty id;
@@ -10,14 +11,13 @@ public class Account {
     private DoubleProperty balance;
     private SimpleObjectProperty<Date> date;
 
-    public Account() {
-    }
+    public Account() {}
 
-    public Account(IntegerProperty id, IntegerProperty userId, DoubleProperty balance, SimpleObjectProperty<Date> date) {
-        this.id = id;
-        this.userId = userId;
-        this.balance = balance;
-        this.date = date;
+    public Account(int userId, double balance,
+                   LocalDate date) {
+        setUserId(userId);
+        setBalance(balance);
+        setDate(Date.valueOf(date));
     }
 
     public int getId() {

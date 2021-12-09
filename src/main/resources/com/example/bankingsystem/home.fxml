@@ -39,11 +39,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.controller.HomeController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="386.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Sign In" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signInScene" prefHeight="50.0" prefWidth="200.0" text="Sign In" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>
@@ -56,7 +56,7 @@
                   <Font name="Copperplate Gothic Bold" size="50.0" />
                </font>
             </Text>
-            <Button layoutX="386.0" layoutY="238.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Sign Up" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="238.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signUpScene" prefHeight="50.0" prefWidth="200.0" text="Sign Up" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>
@@ -64,7 +64,7 @@
                   <Font name="Franklin Gothic Medium" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="386.0" layoutY="313.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="About" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="313.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutScene" prefHeight="50.0" prefWidth="200.0" text="About" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>
@@ -72,7 +72,7 @@
                   <Font name="Franklin Gothic Medium" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="386.0" layoutY="388.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="About" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="388.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exit" prefHeight="50.0" prefWidth="200.0" text="Exit" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>

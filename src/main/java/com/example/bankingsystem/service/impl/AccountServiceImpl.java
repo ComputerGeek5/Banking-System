@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class AccountServiceImpl implements AccountService {
-    private final AccountDAO accountDAO;
+    private static final AccountDAO accountDAO;
     private static final Logger logger = Logger.getLogger(String.valueOf(AccountService.class));
 
-    public AccountServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
+    static {
+        accountDAO = new AccountDAO();
     }
 
     @Override

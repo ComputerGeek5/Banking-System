@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.controller.SignInController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -27,7 +27,15 @@
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
             </TextField>
-            <Button layoutX="386.0" layoutY="349.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Sign In" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="349.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signIn" prefHeight="50.0" prefWidth="200.0" text="Sign In" textFill="#ff00d4">
+               <padding>
+                  <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="Franklin Gothic Medium" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="14.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#homeScene" prefHeight="50.0" prefWidth="200.0" text="&lt;&lt; Home" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>

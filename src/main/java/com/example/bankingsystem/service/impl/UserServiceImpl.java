@@ -1,5 +1,6 @@
 package com.example.bankingsystem.service.impl;
 
+import com.example.bankingsystem.dao.AccountDAO;
 import com.example.bankingsystem.dao.UserDAO;
 import com.example.bankingsystem.model.User;
 import com.example.bankingsystem.service.UserService;
@@ -9,77 +10,38 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
-    private final UserDAO userDAO;
-    private static final Logger logger = Logger.getLogger(String.valueOf(UserService.class));
+    private static final UserDAO userDAO;
+    private static final AccountDAO accountDAO;
 
-    public UserServiceImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    static {
+        userDAO = new UserDAO();
+        accountDAO = new AccountDAO();
     }
 
     @Override
-    public void create(User user) {
-        try {
-            userDAO.create(user);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-        }
+    public void create(User user) throws SQLException, ClassNotFoundException {
+        userDAO.create(user);
     }
 
     @Override
-    public User find(Integer id) {
-        try {
-            User user = userDAO.find(id);
-            return user;
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-        }
-
-        return null;
+    public User find(Integer id) throws SQLException, ClassNotFoundException {
+        User user = userDAO.find(id);
+        return user;
     }
 
     @Override
-    public ObservableList<User> findAll() {
-        try {
-            ObservableList<User> users = userDAO.findAll();
-            return users;
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
-
-        return null;
+    public ObservableList<User> findAll() throws SQLException, ClassNotFoundException {
+        ObservableList<User> users = userDAO.findAll();
+        return users;
     }
 
     @Override
-    public void update(Integer id, User user) {
-        try {
-            userDAO.update(id, user);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+    public void update(Integer id, User user) throws SQLException, ClassNotFoundException {
+        userDAO.update(id, user);
     }
 
     @Override
-    public void delete(Integer id) {
-        try {
-            userDAO.delete(id);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+        userDAO.delete(id);
     }
 }

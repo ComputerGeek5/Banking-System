@@ -18,7 +18,20 @@ public class UserDAO {
             User user = getUserFromResultSet(result);
             return user;
         } catch (SQLException e) {
-            System.out.println("While searching an user with " + id + " id, an error occurred: " + e);
+            System.out.println("While searching an user with id: " + id + ", an error occurred: " + e);
+            throw e;
+        }
+    }
+
+    public User findByUsername(String username) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM tbl_user WHERE username=" + username;
+
+        try {
+            ResultSet result = DBUtil.dbExecuteQuery(selectStmt);
+            User user = getUserFromResultSet(result);
+            return user;
+        } catch (SQLException e) {
+            System.out.println("While searching an user with username: " + username + ", an error occurred: " + e);
             throw e;
         }
     }
@@ -32,7 +45,6 @@ public class UserDAO {
             user.setUsername(rs.getString("name"));
             user.setEmail(rs.getString("email"));
             user.setBirthday(rs.getDate("birthday"));
-            user.setCurrency(rs.getString("currency"));
 
             Account account = accountDAO.find(rs.getInt("account_id"));
             user.setAccount(account);
@@ -63,7 +75,6 @@ public class UserDAO {
             user.setEmail(rs.getString("email"));
             user.setUsername(rs.getString("username"));
             user.setBirthday(rs.getDate("birthday"));
-            user.setCurrency(rs.getString("currency"));
 
             Account account = accountDAO.find(rs.getInt("account_id"));
             user.setAccount(account);
@@ -82,7 +93,6 @@ public class UserDAO {
                 "          email = '" + user.getEmail() + "'\n" +
                 "          password = '" + user.getPassword() + "'\n" +
                 "          birthday = '" + user.getBirthday().toString() + "'\n" +
-                "          currency = '" + user.getCurrency() + "'\n" +
                 "   WHERE EMPLOYEE_ID = " + id + ";\n" +
                 "   COMMIT;\n" +
                 "END;";
@@ -130,12 +140,16 @@ public class UserDAO {
                         "'" + user.getEmail() + "',\n" +
                         "'" + user.getPassword() + "',\n" +
                         "'" + user.getBirthday().toString() + "',\n" +
-                        "'" + user.getCurrency() + "',)\n" +
                 "END;";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
-            accountDAO.create(user.getAccount());
+            user = findByUsername(user.getUsername());
+
+            // Create Account
+            Account account = new Account();
+            account.setUserId(user.getId());
+            accountDAO.create(account);
         } catch (SQLException e) {
             System.out.print("Error occurred while DELETE Operation: " + e);
             throw e;

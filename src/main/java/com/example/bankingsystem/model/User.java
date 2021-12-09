@@ -2,28 +2,24 @@ package com.example.bankingsystem.model;
 import javafx.beans.property.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class User {
     private IntegerProperty id;
-    private StringProperty username;
     private StringProperty email;
     private StringProperty password;
+    private StringProperty username;
     private SimpleObjectProperty<Date> birthday;
-    private StringProperty currency;
     private Account account;
 
     public User() {}
 
-    public User(IntegerProperty id, StringProperty username, StringProperty email,
-                StringProperty password, SimpleObjectProperty<Date> birthday,
-                StringProperty currency, Account account) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.birthday = birthday;
-        this.currency = currency;
-        this.account = account;
+    public User(String email, String password,
+                LocalDate birthday, String username) {
+        setEmail(email);
+        setPassword(password);
+        setUsername(username);
+        setBirthday(Date.valueOf(birthday));
     }
 
     public int getId() {
@@ -60,18 +56,6 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday.set(birthday);
-    }
-
-    public String getCurrency() {
-        return currency.get();
-    }
-
-    public StringProperty currencyProperty() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency.set(currency);
     }
 
     public String getEmail() {
