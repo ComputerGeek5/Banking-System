@@ -1,12 +1,13 @@
 package com.example.bankingsystem.service;
 
-import com.example.bankingsystem.model.User;
 import javafx.collections.ObservableList;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public interface CRUDService<T> {
-    void create(T t) throws SQLException, ClassNotFoundException;
+    T create(T t) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException;
 
     T find(Integer id) throws SQLException, ClassNotFoundException;
 

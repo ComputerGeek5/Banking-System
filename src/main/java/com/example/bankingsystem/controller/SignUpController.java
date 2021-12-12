@@ -1,8 +1,6 @@
 package com.example.bankingsystem.controller;
 
-import com.example.bankingsystem.model.Account;
 import com.example.bankingsystem.model.User;
-import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.UserService;
 import com.example.bankingsystem.service.impl.UserServiceImpl;
 import javafx.event.ActionEvent;
@@ -11,7 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.sql.Date;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
@@ -41,7 +39,7 @@ public class SignUpController extends Controller {
     @FXML
     public DatePicker birthdayField;
 
-    public void signUp(ActionEvent event) {
+    public void signUp(ActionEvent event) throws IOException {
         String email = emailField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -50,7 +48,10 @@ public class SignUpController extends Controller {
         if (email.matches(EMAIL_REGEX) && password.matches(PASSWORD_REGEX)) {
             try {
                 User user = new User(email, password, birthday, username);
-                userService.create(user);
+                user = userService.create(user);
+
+                MainController mainController = new MainController();
+                mainController.homeScene(event);
             } catch (Exception e) {
                 logger.severe("Something went wrong");
             }

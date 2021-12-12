@@ -12,17 +12,22 @@ public class User {
     private SimpleObjectProperty<Date> birthday;
     private Account account;
 
-    public User() {}
+    public User() {
+        this.email = new SimpleStringProperty();
+        this.password = new SimpleStringProperty();
+        this.username = new SimpleStringProperty();
+        this.birthday = new SimpleObjectProperty<>();
+    }
 
     public User(String email, String password,
                 LocalDate birthday, String username) {
-        setEmail(email);
-        setPassword(password);
-        setUsername(username);
-        setBirthday(Date.valueOf(birthday));
+        this.email = new SimpleStringProperty(email);
+        this.password = new SimpleStringProperty(password);
+        this.username = new SimpleStringProperty(username);
+        this.birthday = new SimpleObjectProperty<>(Date.valueOf(birthday));
     }
 
-    public int getId() {
+    public Integer getId() {
         return id.get();
     }
 
@@ -30,7 +35,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id.set(id);
     }
 

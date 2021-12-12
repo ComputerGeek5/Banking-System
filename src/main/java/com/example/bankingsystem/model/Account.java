@@ -1,26 +1,29 @@
 package com.example.bankingsystem.model;
 
-import javafx.beans.property.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Account {
     private IntegerProperty id;
-    private IntegerProperty userId;
     private DoubleProperty balance;
-    private SimpleObjectProperty<Date> date;
+    private SimpleObjectProperty<Timestamp> timestamp;
 
-    public Account() {}
-
-    public Account(int userId, double balance,
-                   LocalDate date) {
-        setUserId(userId);
-        setBalance(balance);
-        setDate(Date.valueOf(date));
+    public Account() {
+        this.balance = new SimpleDoubleProperty(0);
+        this.timestamp = new SimpleObjectProperty<>(Timestamp.valueOf(LocalDateTime.now()));
     }
 
-    public int getId() {
+    public Account(double balance, LocalDateTime timestamp) {
+        this.balance = new SimpleDoubleProperty(balance);
+        this.timestamp = new SimpleObjectProperty<>(Timestamp.valueOf(timestamp));
+    }
+
+    public Integer getId() {
         return id.get();
     }
 
@@ -28,20 +31,8 @@ public class Account {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id.set(id);
-    }
-
-    public int getUserId() {
-        return userId.get();
-    }
-
-    public IntegerProperty userIdProperty() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId.set(userId);
     }
 
     public double getBalance() {
@@ -56,15 +47,15 @@ public class Account {
         this.balance.set(balance);
     }
 
-    public Date getDate() {
-        return date.get();
+    public Timestamp getTimestamp() {
+        return timestamp.get();
     }
 
-    public SimpleObjectProperty<Date> dateProperty() {
-        return date;
+    public SimpleObjectProperty<Timestamp> timestampProperty() {
+        return timestamp;
     }
 
-    public void setDate(Date date) {
-        this.date.set(date);
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp.set(timestamp);
     }
 }

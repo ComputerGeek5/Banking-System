@@ -1,7 +1,7 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.Application;
-import javafx.application.Platform;
+import com.example.bankingsystem.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,7 +19,7 @@ public class Controller {
         stage.show();
     }
 
-    public void mainScene(ActionEvent event) throws IOException {
+    public void mainScene(ActionEvent event, User user) throws IOException {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
         stage = new Stage();
@@ -28,6 +28,7 @@ public class Controller {
         stage.setScene(scene);
         stage.setTitle("Banking System");
         stage.show();
+        MainController.initializeNodes(user);
     }
 
     public void signInScene(ActionEvent event) throws IOException {

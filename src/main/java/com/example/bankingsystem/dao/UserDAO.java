@@ -1,9 +1,14 @@
 package com.example.bankingsystem.dao;
+
 import com.example.bankingsystem.model.Account;
 import com.example.bankingsystem.model.User;
+import com.example.bankingsystem.util.CryptoUtil;
+import com.example.bankingsystem.util.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.example.bankingsystem.util.DBUtil;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,15 +28,27 @@ public class UserDAO {
         }
     }
 
-    public User findByUsername(String username) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM tbl_user WHERE username=" + username;
+    public User findTopById() throws SQLException, ClassNotFoundException {
+        String findUser =
+                "SELECT\n" +
+                    "MAX(id) as id,\n" +
+                "FROM tbl_user\n" +
+                "GROUP BY id;";
+
+        Integer id = null;
+        User user = null;
 
         try {
-            ResultSet result = DBUtil.dbExecuteQuery(selectStmt);
-            User user = getUserFromResultSet(result);
+            ResultSet resultSet = DBUtil.dbExecuteQuery(findUser);
+
+            if(resultSet.next()) {
+                id = resultSet.getInt("id");
+                user = find(id);
+            }
+
             return user;
         } catch (SQLException e) {
-            System.out.println("While searching an user with username: " + username + ", an error occurred: " + e);
+            System.out.println("While searching an user with id: " + id + ", an error occurred: " + e);
             throw e;
         }
     }
@@ -99,7 +116,7 @@ public class UserDAO {
 
         try {
             User toUpdate = find(id);
-            Account account = accountDAO.find(toUpdate.getId());
+            Account account = accountDAO.find(toUpdate.getAccount().getId());
             DBUtil.dbExecuteUpdate(updateStmt);
             accountDAO.update(account.getId(), user.getAccount());
         } catch (SQLException e) {
@@ -126,32 +143,33 @@ public class UserDAO {
         }
     }
 
-    public void create(User user) throws SQLException, ClassNotFoundException {
-        String updateStmt =
-                "BEGIN\n" +
-                    "INSERT INTO tbl_user(\n" +
-                        "username,\n" +
-                        "email,\n" +
-                        "password,\n" +
-                        "birthday,\n" +
-                        "currency)\n" +
-                    "VALUES(\n" +
-                        "'" + user.getUsername() + "',\n" +
-                        "'" + user.getEmail() + "',\n" +
-                        "'" + user.getPassword() + "',\n" +
-                        "'" + user.getBirthday().toString() + "',\n" +
-                "END;";
-
+    public User create(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
-            user = findByUsername(user.getUsername());
+            // Hash Password
+            user.setPassword(CryptoUtil.hash(user.getPassword()));
 
             // Create Account
             Account account = new Account();
-            account.setUserId(user.getId());
-            accountDAO.create(account);
+            account = accountDAO.create(account);
+
+            String updateStmt =
+                    "INSERT INTO tbl_user(\n" +
+                        "account_id,\n" +
+                        "username,\n" +
+                        "email,\n" +
+                        "password,\n" +
+                        "birthday)\n" +
+                    "VALUES(\n" +
+                        account.getId() + ",\n" +
+                        "'" + user.getUsername() + "',\n" +
+                        "'" + user.getEmail() + "',\n" +
+                        "'" + user.getPassword() + "',\n" +
+                        "'" + user.getBirthday().toString() + "');";
+
+            DBUtil.dbExecuteUpdate(updateStmt);
+            return findTopById();
         } catch (SQLException e) {
-            System.out.print("Error occurred while DELETE Operation: " + e);
+            System.out.print("Error occurred while INSERT Operation: " + e);
             throw e;
         }
     }

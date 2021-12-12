@@ -6,8 +6,9 @@ import com.example.bankingsystem.model.User;
 import com.example.bankingsystem.service.UserService;
 import javafx.collections.ObservableList;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
     private static final UserDAO userDAO;
@@ -19,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(User user) throws SQLException, ClassNotFoundException {
-        userDAO.create(user);
+    public User create(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+        return userDAO.create(user);
     }
 
     @Override

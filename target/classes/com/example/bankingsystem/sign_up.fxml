@@ -2,13 +2,16 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="1000.0" styleClass="main" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bankingsystem.controller.SignUpController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -17,17 +20,7 @@
                   <Font name="Copperplate Gothic Bold" size="50.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="386.0" layoutY="165.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" promptText="Email">
-               <font>
-                  <Font name="Franklin Gothic Medium" size="18.0" />
-               </font>
-            </TextField>
-            <TextField alignment="CENTER" layoutX="386.0" layoutY="238.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" promptText="Password">
-               <font>
-                  <Font name="Franklin Gothic Medium" size="18.0" />
-               </font>
-            </TextField>
-            <Button layoutX="386.0" layoutY="349.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Sign Up" textFill="#ff00d4">
+            <Button layoutX="386.0" layoutY="445.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#signUp" prefHeight="50.0" prefWidth="200.0" text="Sign Up" textFill="#ff00d4">
                <padding>
                   <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
                </padding>
@@ -35,6 +28,46 @@
                   <Font name="Franklin Gothic Medium" size="20.0" />
                </font>
             </Button>
+            <Button layoutX="14.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#homeScene" prefHeight="50.0" prefWidth="200.0" text="&lt;&lt; Home" textFill="#ff00d4">
+               <padding>
+                  <Insets bottom="10.0" left="60.0" right="60.0" top="10.0" />
+               </padding>
+               <font>
+                  <Font name="Franklin Gothic Medium" size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="usernameField" alignment="CENTER" layoutX="509.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Username">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="272.0" layoutY="293.0" text="Username:" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="271.0" layoutY="218.0" text="Password:" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="30.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordField" layoutX="509.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
+            <DatePicker fx:id="birthdayField" layoutX="509.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
+            <Label layoutX="291.0" layoutY="368.0" text="Birthday:" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="349.0" layoutY="143.0" text="Email:" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" alignment="CENTER" layoutX="509.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Email">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="18.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>

@@ -1,8 +1,12 @@
 package com.example.bankingsystem.util;
-import com.sun.rowset.CachedRowSetImpl;
+
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 
 public class DBUtil {
+    private static final String user = "root";
+    private static final String password = "";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static Connection conn = null;
     private static final String connStr = "jdbc:mysql://127.0.0.1:3306/banking_system_db";
@@ -18,7 +22,7 @@ public class DBUtil {
         System.out.println("JDBC Driver Registered!");
         //Establish the Oracle Connection using Connection String
         try {
-            conn = DriverManager.getConnection(connStr);
+            conn = DriverManager.getConnection(connStr, user, password);
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console" + e);
             e.printStackTrace();
@@ -39,14 +43,13 @@ public class DBUtil {
     public static ResultSet dbExecuteQuery(String queryStmt) throws SQLException, ClassNotFoundException {
         Statement stmt = null;
         ResultSet resultSet = null;
-        CachedRowSetImpl crs = null;
+        CachedRowSet crs = RowSetProvider.newFactory().createCachedRowSet();
 
         try {
             dbConnect();
             System.out.println("Select statement: " + queryStmt + "\n");
             stmt = conn.createStatement();
             resultSet = stmt.executeQuery(queryStmt);
-            crs = new CachedRowSetImpl();
             crs.populate(resultSet);
         } catch (SQLException e) {
             System.out.println("Problem occurred at executeQuery operation : " + e);

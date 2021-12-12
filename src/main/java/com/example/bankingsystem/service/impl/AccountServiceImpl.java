@@ -3,7 +3,6 @@ package com.example.bankingsystem.service.impl;
 import com.example.bankingsystem.dao.AccountDAO;
 import com.example.bankingsystem.model.Account;
 import com.example.bankingsystem.service.AccountService;
-import com.example.bankingsystem.service.UserService;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
@@ -18,73 +17,29 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void create(Account account) {
-        try {
-            accountDAO.create(account);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+    public Account create(Account account) throws SQLException, ClassNotFoundException {
+        return accountDAO.create(account);
     }
 
     @Override
-    public Account find(Integer id) {
-        try {
-            Account account = accountDAO.find(id);
-            return account;
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
-
-        return null;
+    public Account find(Integer id) throws SQLException, ClassNotFoundException {
+        Account account = accountDAO.find(id);
+        return account;
     }
 
     @Override
-    public ObservableList<Account> findAll() {
-        try {
-            ObservableList<Account> accounts = accountDAO.findAll();
-            return accounts;
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
-
-        return null;
+    public ObservableList<Account> findAll() throws SQLException, ClassNotFoundException {
+        ObservableList<Account> accounts = accountDAO.findAll();
+        return accounts;
     }
 
     @Override
-    public void update(Integer id, Account account) {
-        try {
-            accountDAO.update(id, account);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+    public void update(Integer id, Account account) throws SQLException, ClassNotFoundException {
+        accountDAO.update(id, account);
     }
 
     @Override
-    public void delete(Integer id) {
-        try {
-            accountDAO.delete(id);
-        } catch (SQLException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            logger.severe(e.getMessage());
-            e.printStackTrace();
-        }
+    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+        accountDAO.delete(id);
     }
 }

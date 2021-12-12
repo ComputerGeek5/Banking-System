@@ -20,6 +20,31 @@ public class AccountDAO {
         }
     }
 
+    public Account findTopById() throws SQLException, ClassNotFoundException {
+        String selectStmt =
+                "SELECT\n" +
+                    "MAX(id) as id,\n" +
+                "FROM tbl_account\n" +
+                "GROUP BY id;";
+
+        Integer id = null;
+        Account account = null;
+
+        try {
+            ResultSet result = DBUtil.dbExecuteQuery(selectStmt);
+
+            if (result.next()) {
+                id = result.getInt("id");
+                account = find(id);
+            }
+
+            return account;
+        } catch (SQLException e) {
+            System.out.println("While searching an account with " + id + " id, an error occurred: " + e);
+            throw e;
+        }
+    }
+
     private Account getAccountFromResultSet (ResultSet rs) throws SQLException
     {
         Account account = null;
@@ -27,9 +52,8 @@ public class AccountDAO {
         if (rs.next()) {
             account = new Account();
             account.setId(rs.getInt("id"));
-            account.setUserId(rs.getInt("user_id"));
             account.setBalance(rs.getDouble("balance"));
-            account.setDate(rs.getDate("date"));
+            account.setTimestamp(rs.getTimestamp("datetime"));
         }
 
         return account;
@@ -54,9 +78,8 @@ public class AccountDAO {
         while (rs.next()) {
             Account account = new Account();
             account.setId(rs.getInt("id"));
-            account.setUserId(rs.getInt("user_id"));
             account.setBalance(rs.getDouble("balance"));
-            account.setDate(rs.getDate("date"));
+            account.setTimestamp(rs.getTimestamp("datetime"));
             accounts.add(account);
         }
 
@@ -65,13 +88,10 @@ public class AccountDAO {
 
     public void update(Integer id, Account account) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "BEGIN\n" +
-                        "   UPDATE tbl_account\n" +
-                        "      SET balance = '" + account.getBalance() + "'\n" +
-                        "          date = '" + account.getDate() + "'\n" +
-                        "   WHERE EMPLOYEE_ID = " + id + ";\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+                "UPDATE tbl_account\n" +
+                "      SET balance = '" + account.getBalance() + "'\n" +
+                "          datetime = '" + account.getTimestamp() + "'\n" +
+                "WHERE EMPLOYEE_ID = " + id + ";\n";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
@@ -83,11 +103,8 @@ public class AccountDAO {
 
     public void delete(Integer id) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "BEGIN\n" +
-                        "   DELETE FROM tbl_account\n" +
-                        "         WHERE id ="+ id +";\n" +
-                        "   COMMIT;\n" +
-                        "END;";
+                "DELETE FROM tbl_account\n" +
+                "    WHERE id ="+ id +";\n";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
@@ -97,23 +114,20 @@ public class AccountDAO {
         }
     }
 
-    public void create(Account account) throws SQLException, ClassNotFoundException {
+    public Account create(Account account) throws SQLException, ClassNotFoundException {
         String updateStmt =
-                "BEGIN\n" +
-                        "INSERT INTO tbl_account(\n" +
-                        "user_id,\n" +
-                        "balance,\n" +
-                        "date,\n" +
-                        "VALUES(\n" +
-                        "'" + account.getUserId() + "',\n" +
-                        "'" + account.getBalance() + "',\n" +
-                        "'" + account.getDate() + "',\n" +
-                        "END;";
+                "INSERT INTO tbl_account(\n" +
+                    "balance,\n" +
+                    "datetime)\n" +
+                "VALUES(\n" +
+                    account.getBalance() + ",\n" +
+                    "'" + account.getTimestamp() + "');";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
+            return findTopById();
         } catch (SQLException e) {
-            System.out.print("Error occurred while DELETE Operation: " + e);
+            System.out.print("Error occurred while INSERT Operation: " + e);
             throw e;
         }
     }
