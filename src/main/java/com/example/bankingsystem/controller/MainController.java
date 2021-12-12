@@ -15,18 +15,15 @@ import java.io.IOException;
 
 public class MainController extends Controller {
     @FXML
-    private static TextField emailField;
+    private TextField emailFieldMain;
 
     @FXML
-    private static TextField usernameField;
+    private TextField usernameFieldMain;
 
     @FXML
-    private static TextField passwordField;
+    private DatePicker birthdayFieldMain;
 
-    @FXML
-    private static DatePicker birthdayField;
-
-    public void homeScene(ActionEvent event) throws IOException {
+    public void homeScene(ActionEvent event, User user) throws IOException {
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
         stage = new Stage();
@@ -37,11 +34,9 @@ public class MainController extends Controller {
         stage.show();
     }
 
-    static void initializeNodes(User user) {
-        emailField.setText(user.getEmail());
-        usernameField.setText(user.getEmail());
-        birthdayField.setValue(user.getBirthday().toLocalDate());
+    public void initializeNodes(User user) {
+        emailFieldMain.setText(user.getEmail());
+        usernameFieldMain.setText(user.getEmail());
+        birthdayFieldMain.setValue(user.getBirthday().toLocalDate());
     }
-
-
 }

@@ -1,9 +1,6 @@
 package com.example.bankingsystem.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -14,16 +11,18 @@ public class Account {
     private SimpleObjectProperty<Timestamp> timestamp;
 
     public Account() {
+        this.id = new SimpleIntegerProperty();
         this.balance = new SimpleDoubleProperty(0);
         this.timestamp = new SimpleObjectProperty<>(Timestamp.valueOf(LocalDateTime.now()));
     }
 
     public Account(double balance, LocalDateTime timestamp) {
+        this.id = new SimpleIntegerProperty();
         this.balance = new SimpleDoubleProperty(balance);
         this.timestamp = new SimpleObjectProperty<>(Timestamp.valueOf(timestamp));
     }
 
-    public Integer getId() {
+    public int getId() {
         return id.get();
     }
 
@@ -31,7 +30,7 @@ public class Account {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 

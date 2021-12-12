@@ -28,16 +28,16 @@ public class SignUpController extends Controller {
     }
 
     @FXML
-    public TextField emailField;
+    private TextField emailField;
 
     @FXML
-    public TextField usernameField;
+    private TextField usernameField;
 
     @FXML
-    public PasswordField passwordField;
+    private PasswordField passwordField;
 
     @FXML
-    public DatePicker birthdayField;
+    private DatePicker birthdayField;
 
     public void signUp(ActionEvent event) throws IOException {
         String email = emailField.getText();
@@ -49,9 +49,7 @@ public class SignUpController extends Controller {
             try {
                 User user = new User(email, password, birthday, username);
                 user = userService.create(user);
-
-                MainController mainController = new MainController();
-                mainController.homeScene(event);
+                mainScene(event, user);
             } catch (Exception e) {
                 logger.severe("Something went wrong");
             }

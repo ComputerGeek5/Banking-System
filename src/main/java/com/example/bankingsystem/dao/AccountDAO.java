@@ -23,7 +23,7 @@ public class AccountDAO {
     public Account findTopById() throws SQLException, ClassNotFoundException {
         String selectStmt =
                 "SELECT\n" +
-                    "MAX(id) as id,\n" +
+                    "MAX(id) as id\n" +
                 "FROM tbl_account\n" +
                 "GROUP BY id;";
 

@@ -28,7 +28,9 @@ public class Controller {
         stage.setScene(scene);
         stage.setTitle("Banking System");
         stage.show();
-        MainController.initializeNodes(user);
+
+        MainController mainController = new MainController();
+        mainController.initializeNodes(user);
     }
 
     public void signInScene(ActionEvent event) throws IOException {

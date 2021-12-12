@@ -31,7 +31,7 @@ public class UserDAO {
     public User findTopById() throws SQLException, ClassNotFoundException {
         String findUser =
                 "SELECT\n" +
-                    "MAX(id) as id,\n" +
+                    "MAX(id) as id\n" +
                 "FROM tbl_user\n" +
                 "GROUP BY id;";
 
@@ -59,7 +59,7 @@ public class UserDAO {
         if (rs.next()) {
             user = new User();
             user.setId(rs.getInt("id"));
-            user.setUsername(rs.getString("name"));
+            user.setUsername(rs.getString("username"));
             user.setEmail(rs.getString("email"));
             user.setBirthday(rs.getDate("birthday"));
 

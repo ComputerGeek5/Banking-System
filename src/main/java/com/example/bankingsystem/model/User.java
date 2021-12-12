@@ -13,6 +13,7 @@ public class User {
     private Account account;
 
     public User() {
+        this.id = new SimpleIntegerProperty();
         this.email = new SimpleStringProperty();
         this.password = new SimpleStringProperty();
         this.username = new SimpleStringProperty();
@@ -27,7 +28,7 @@ public class User {
         this.birthday = new SimpleObjectProperty<>(Date.valueOf(birthday));
     }
 
-    public Integer getId() {
+    public int getId() {
         return id.get();
     }
 
@@ -35,7 +36,7 @@ public class User {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 
