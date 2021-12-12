@@ -29,7 +29,7 @@ public class Controller {
         stage.setTitle("Banking System");
         stage.show();
 
-        MainController mainController = new MainController();
+        MainController mainController = fxmlLoader.getController();
         mainController.initializeNodes(user);
     }
 

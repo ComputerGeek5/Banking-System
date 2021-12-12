@@ -55,4 +55,36 @@ public class SignUpController extends Controller {
             }
         }
     }
+
+    public TextField getEmailField() {
+        return emailField;
+    }
+
+    public void setEmailField(String emailField) {
+        this.emailField.setText(emailField);
+    }
+
+    public TextField getUsernameField() {
+        return usernameField;
+    }
+
+    public void setUsernameField(String usernameField) {
+        this.usernameField.setText(usernameField);
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(String passwordField) {
+        this.passwordField.setText(passwordField);
+    }
+
+    public DatePicker getBirthdayField() {
+        return birthdayField;
+    }
+
+    public void setBirthdayField(LocalDate birthdayField) {
+        this.birthdayField.setValue(birthdayField);
+    }
 }
