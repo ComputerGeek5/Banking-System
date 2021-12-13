@@ -51,7 +51,7 @@ public class SignUpController extends Controller {
                 user = userService.create(user);
                 mainScene(event, user);
             } catch (Exception e) {
-                logger.severe("Something went wrong");
+                logger.severe("Something went wrong\n");
             }
         }
     }

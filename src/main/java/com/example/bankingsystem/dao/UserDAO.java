@@ -53,6 +53,19 @@ public class UserDAO {
         }
     }
 
+    public User findByEmail(String email) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM tbl_user WHERE email='" + email + "';";
+
+        try {
+            ResultSet result = DBUtil.dbExecuteQuery(selectStmt);
+            User user = getUserFromResultSet(result);
+            return user;
+        } catch (SQLException e) {
+            System.out.println("While searching an user with email: " + email + ", an error occurred: " + e);
+            throw e;
+        }
+    }
+
     private User getUserFromResultSet(ResultSet rs) throws SQLException, ClassNotFoundException {
         User user = null;
 
@@ -60,6 +73,7 @@ public class UserDAO {
             user = new User();
             user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setBirthday(rs.getDate("birthday"));
 
@@ -90,6 +104,7 @@ public class UserDAO {
             User user = new User();
             user.setId(rs.getInt("id"));
             user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
             user.setUsername(rs.getString("username"));
             user.setBirthday(rs.getDate("birthday"));
 
@@ -101,6 +116,7 @@ public class UserDAO {
 
         return users;
     }
+
 
     public void update(Integer id, User user) throws SQLException, ClassNotFoundException {
         String updateStmt =
@@ -125,6 +141,7 @@ public class UserDAO {
         }
     }
 
+
     public void delete(Integer id) throws SQLException, ClassNotFoundException {
         String updateStmt =
                 "BEGIN\n" +
@@ -142,6 +159,7 @@ public class UserDAO {
             throw e;
         }
     }
+
 
     public User create(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
         try {

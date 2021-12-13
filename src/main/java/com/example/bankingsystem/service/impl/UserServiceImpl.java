@@ -45,4 +45,10 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) throws SQLException, ClassNotFoundException {
         userDAO.delete(id);
     }
+
+    @Override
+    public User findByEmail(String email) throws SQLException, ClassNotFoundException {
+        User user = userDAO.findByEmail(email);
+        return user;
+    }
 }

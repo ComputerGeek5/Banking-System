@@ -33,7 +33,7 @@
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <Text fill="#e2ff00" layoutX="302.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00">
+            <Text fill="#e2ff00" layoutX="302.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="Informal Roman" size="40.0" />
                </font>
@@ -63,7 +63,6 @@
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" layoutX="723.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
             <TextField alignment="CENTER" layoutX="90.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
@@ -116,6 +115,11 @@
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
+            <PasswordField fx:id="passwordField" layoutX="721.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Password">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="18.0" />
+               </font>
+            </PasswordField>
          </children>
       </AnchorPane>
    </children>
