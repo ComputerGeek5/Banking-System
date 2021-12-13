@@ -14,11 +14,13 @@ import java.time.LocalDate;
 import java.util.logging.Logger;
 
 public class SignUpController extends Controller {
+
     // Email format
     private static final String EMAIL_REGEX = "^([a-z0-9!#$&-`.,_]{1,20})@([a-z0-9!#$&-`.,_]{1,20})\\.com$";
 
     // At least 1 uppercase, 1 special, 3 digits and at least 8 characters long
     private static final String PASSWORD_REGEX = "^(?=.{8,}$)(?=.*[A-Z])(?=.*[0-9]){3,}(?=.*\\W).*$";
+
     private static final UserService userService;
     private static final Logger logger;
 

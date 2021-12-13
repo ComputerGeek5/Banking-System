@@ -1,8 +1,10 @@
 package com.example.bankingsystem.dao;
+
 import com.example.bankingsystem.model.Account;
+import com.example.bankingsystem.util.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.example.bankingsystem.util.DBUtil;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -52,7 +54,7 @@ public class AccountDAO {
         if (rs.next()) {
             account = new Account();
             account.setId(rs.getInt("id"));
-            account.setBalance(rs.getDouble("balance"));
+            account.setBalance(rs.getBigDecimal("balance"));
             account.setTimestamp(rs.getTimestamp("datetime"));
         }
 
@@ -78,7 +80,7 @@ public class AccountDAO {
         while (rs.next()) {
             Account account = new Account();
             account.setId(rs.getInt("id"));
-            account.setBalance(rs.getDouble("balance"));
+            account.setBalance(rs.getBigDecimal("balance"));
             account.setTimestamp(rs.getTimestamp("datetime"));
             accounts.add(account);
         }
@@ -86,15 +88,17 @@ public class AccountDAO {
         return accounts;
     }
 
-    public void update(Integer id, Account account) throws SQLException, ClassNotFoundException {
+    public Account update(int id, Account account) throws SQLException, ClassNotFoundException {
         String updateStmt =
                 "UPDATE tbl_account\n" +
-                "      SET balance = '" + account.getBalance() + "'\n" +
+                "      SET balance = '" + account.getBalance() + "',\n" +
                 "          datetime = '" + account.getTimestamp() + "'\n" +
-                "WHERE EMPLOYEE_ID = " + id + ";\n";
+                "WHERE id = " + id + ";\n";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
+            Account updated = find(id);
+            return updated;
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;

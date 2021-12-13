@@ -118,23 +118,22 @@ public class UserDAO {
     }
 
 
-    public void update(Integer id, User user) throws SQLException, ClassNotFoundException {
+    public User update(int id, User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+        // Hash Password
+        user.setPassword(CryptoUtil.hash(user.getPassword()));
+
         String updateStmt =
-                "BEGIN\n" +
                 "   UPDATE tbl_user\n" +
-                "      SET username = '" + user.getUsername() + "'\n" +
-                "          email = '" + user.getEmail() + "'\n" +
-                "          password = '" + user.getPassword() + "'\n" +
+                "      SET username = '" + user.getUsername() + "',\n" +
+                "          email = '" + user.getEmail() + "',\n" +
+                "          password = '" + user.getPassword() + "',\n" +
                 "          birthday = '" + user.getBirthday().toString() + "'\n" +
-                "   WHERE EMPLOYEE_ID = " + id + ";\n" +
-                "   COMMIT;\n" +
-                "END;";
+                "   WHERE id = " + id + ";\n";
 
         try {
-            User toUpdate = find(id);
-            Account account = accountDAO.find(toUpdate.getAccount().getId());
             DBUtil.dbExecuteUpdate(updateStmt);
-            accountDAO.update(account.getId(), user.getAccount());
+            User updated = find(id);
+            return updated;
         } catch (SQLException e) {
             System.out.print("Error occurred while UPDATE Operation: " + e);
             throw e;

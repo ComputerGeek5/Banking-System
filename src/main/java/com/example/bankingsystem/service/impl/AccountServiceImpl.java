@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account find(Integer id) throws SQLException, ClassNotFoundException {
+    public Account find(int id) throws SQLException, ClassNotFoundException {
         Account account = accountDAO.find(id);
         return account;
     }
@@ -34,12 +34,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void update(Integer id, Account account) throws SQLException, ClassNotFoundException {
-        accountDAO.update(id, account);
+    public Account update(int id, Account account) throws SQLException, ClassNotFoundException {
+        Account updated =  accountDAO.update(id, account);
+        return updated;
     }
 
     @Override
-    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+    public void delete(int id) throws SQLException, ClassNotFoundException {
         accountDAO.delete(id);
     }
 }

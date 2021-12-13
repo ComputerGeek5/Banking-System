@@ -30,7 +30,9 @@ public class Controller {
         stage.show();
 
         MainController mainController = fxmlLoader.getController();
-        mainController.initializeNodes(user);
+        mainController.setUser(user);
+        mainController.setAccount(user.getAccount());
+        mainController.initializeNodes();
     }
 
     public void signInScene(ActionEvent event) throws IOException {

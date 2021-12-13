@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User find(Integer id) throws SQLException, ClassNotFoundException {
+    public User find(int id) throws SQLException, ClassNotFoundException {
         User user = userDAO.find(id);
         return user;
     }
@@ -37,12 +37,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(Integer id, User user) throws SQLException, ClassNotFoundException {
-        userDAO.update(id, user);
+    public User update(int id, User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+        User updated = userDAO.update(id, user);
+        return updated;
     }
 
     @Override
-    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+    public void delete(int id) throws SQLException, ClassNotFoundException {
         userDAO.delete(id);
     }
 

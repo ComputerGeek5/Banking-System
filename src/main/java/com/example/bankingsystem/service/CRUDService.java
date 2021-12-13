@@ -9,11 +9,11 @@ import java.sql.SQLException;
 public interface CRUDService<T> {
     T create(T t) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException;
 
-    T find(Integer id) throws SQLException, ClassNotFoundException;
+    T find(int id) throws SQLException, ClassNotFoundException;
 
     ObservableList<T> findAll() throws SQLException, ClassNotFoundException;
 
-    void update(Integer id, T t) throws SQLException, ClassNotFoundException;
+    T update(int id, T t) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException;
 
-    void delete(Integer id) throws SQLException, ClassNotFoundException;
+    void delete(int id) throws SQLException, ClassNotFoundException;
 }
