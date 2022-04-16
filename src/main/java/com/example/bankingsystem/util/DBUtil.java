@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class DBUtil {
     private static final String user = "root";
-    private static final String password = "";
+    private static final String password = "root";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static Connection conn = null;
     private static final String connStr = "jdbc:mysql://127.0.0.1:3306/banking_system_db";

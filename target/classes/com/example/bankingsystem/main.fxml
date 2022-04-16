@@ -18,12 +18,12 @@
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Text fill="#000dff" layoutX="240.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Banking System">
+            <Text fill="#000dff" layoutX="318.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Banking System">
                <font>
                   <Font name="Copperplate Gothic Bold" size="50.0" />
                </font>
             </Text>
-            <Button layoutX="276.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Deposit" textFill="RED">
+            <Button layoutX="276.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deposit" prefHeight="40.0" prefWidth="150.0" text="Deposit" textFill="RED">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
@@ -33,49 +33,48 @@
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <Text fill="#e2ff00" layoutX="302.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100.00">
+            <Text fx:id="balanceField" fill="#e2ff00" layoutX="276.0" layoutY="566.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="681.0">
                <font>
                   <Font name="Informal Roman" size="40.0" />
                </font>
             </Text>
-            <Button layoutX="276.0" layoutY="465.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Withdraw" textFill="RED">
+            <Button layoutX="276.0" layoutY="465.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#withdraw" prefHeight="40.0" prefWidth="150.0" text="Withdraw" textFill="RED">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="645.0" layoutY="122.0" text="Settings" textFill="#ff00d4" underline="true">
+            <Label layoutX="662.0" layoutY="179.0" text="Settings" textFill="#ff00d4" textOverrun="LEADING_ELLIPSIS" underline="true">
                <font>
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <TextField alignment="CENTER" layoutX="721.0" layoutY="330.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Username">
+            <TextField fx:id="usernameField" layoutX="735.0" layoutY="320.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Username">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="526.0" layoutY="330.0" text="Username:" textFill="WHITE">
+            <Label layoutX="540.0" layoutY="320.0" text="Username:" textFill="WHITE">
                <font>
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="527.0" layoutY="258.0" text="Password:" textFill="WHITE">
+            <Label layoutX="541.0" layoutY="248.0" text="Password:" textFill="WHITE">
                <font>
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
-            <PasswordField layoutX="723.0" layoutY="255.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-            <TextField alignment="CENTER" layoutX="90.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0">
+            <TextField fx:id="depositField" alignment="CENTER" layoutX="90.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
             </TextField>
-            <TextField alignment="CENTER" layoutX="90.0" layoutY="465.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0">
+            <TextField fx:id="withdrawField" alignment="CENTER" layoutX="90.0" layoutY="465.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
             </TextField>
-            <DatePicker layoutX="722.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-            <Label layoutX="545.0" layoutY="398.0" text="Birthday:" textFill="WHITE">
+            <DatePicker fx:id="birthdayField" layoutX="736.0" layoutY="385.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
+            <Label layoutX="559.0" layoutY="388.0" text="Birthday:" textFill="WHITE">
                <font>
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
@@ -88,7 +87,7 @@
                 <NumberAxis side="LEFT" tickLabelFill="WHITE" />
               </yAxis>
             </LineChart>
-            <Button layoutX="568.0" layoutY="470.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Save" textFill="#ff00d4">
+            <Button layoutX="587.0" layoutY="458.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="300.0" text="Save" textFill="#ff00d4">
                <font>
                   <Font name="Franklin Gothic Medium" size="18.0" />
                </font>
@@ -101,21 +100,21 @@
                   <Font name="Franklin Gothic Medium" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="602.0" layoutY="186.0" text="Email:" textFill="WHITE">
-               <font>
-                  <Font name="Copperplate Gothic Bold" size="30.0" />
-               </font>
-            </Label>
-            <TextField alignment="CENTER" layoutX="723.0" layoutY="183.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Email">
-               <font>
-                  <Font name="Franklin Gothic Medium" size="18.0" />
-               </font>
-            </TextField>
             <Label layoutX="709.0" layoutY="47.0" textFill="WHITE">
                <font>
                   <Font name="Copperplate Gothic Bold" size="30.0" />
                </font>
             </Label>
+            <PasswordField fx:id="passwordField" layoutX="735.0" layoutY="245.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" promptText="Password">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="18.0" />
+               </font>
+            </PasswordField>
+            <Text fx:id="welcomeField" fill="RED" layoutX="514.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="462.775390625">
+               <font>
+                  <Font name="Informal Roman" size="40.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
